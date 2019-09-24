@@ -16,12 +16,13 @@ public class User {
     private String lastName;
     private String email;
     private String username;
+    private String password;
     private String address;
     private int contact_number;
     private String role;
     
     //constructor
-    public User(int id,String firstName, String lastName, String email, String username,String address,int contact_number,String role){
+    public User(int id,String firstName, String lastName, String email, String username,String password,String address,int contact_number,String role){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -88,6 +89,14 @@ public class User {
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public String getPassword(){
+        return password;
+    }
+    
+    public void setPassword(String password){
+        this.password = password;
     }
 
     /**
