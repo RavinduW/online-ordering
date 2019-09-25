@@ -5,12 +5,18 @@
  */
 package com.pkg.controllers;
 
+import com.pkg.services.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -70,7 +76,37 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        UserService us = new UserService();
+        HttpSession session = request.getSession();
+        String username,password;
+        
+        username = request.getParameter("username");
+        password = request.getParameter("password");
+        
+        try {
+            if(us.UserLogin(username, password) && us.getUserDetails(username).get(0).getRole().equals("customer")){
+
+                session.setAttribute("user",us.getUserDetails(username).get(0).getUsername());
+                session.setMaxInactiveInterval(30);
+                
+                response.sendRedirect("/customer");
+            }else if(us.UserLogin(username, password) && us.getUserDetails(username).get(0).getRole().equals("admin")){
+                
+                session.setAttribute("user",us.getUserDetails(username).get(0).getUsername());
+                session.setMaxInactiveInterval(30);
+                
+                response.sendRedirect("/admin");
+                
+            }else{
+                response.sendRedirect("/error404");
+            } 
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidKeySpecException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**

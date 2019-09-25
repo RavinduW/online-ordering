@@ -26,14 +26,37 @@
         <form>
         <fieldset>
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="firstName">First Name</label>
+            <input type="text" name="firstName" class="form-control" id="firstName" placeholder="First Name">
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Last Name">
           </div>
-
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+          </div>  
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+          </div>
+          <div class="form-group">
+            <label for="contact_number">Contact Number</label>
+            <input type="text" name="contact_number" class="form-control" id="contact_number" placeholder="Contact Number">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+          </div>      
+          <div class="form-group">
+             <label for="confirm_password">Confirm Password</label>
+             <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password">
+          </div>  
           <button type="submit" class="btn btn-primary">Submit</button>
         </fieldset>
         </form> 
