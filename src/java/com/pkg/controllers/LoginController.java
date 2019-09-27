@@ -5,6 +5,7 @@
  */
 package com.pkg.controllers;
 
+import com.pkg.models.User;
 import com.pkg.services.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +13,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -62,7 +64,10 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        HttpSession session = request.getSession();
+        session.invalidate();
+        response.sendRedirect("/OnlinePizza/Home/login.jsp");
     }
 
     /**
@@ -78,6 +83,7 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         
         UserService us = new UserService();
+        RequestDispatcher rd;
         HttpSession session = request.getSession();
         String username,password;
         
@@ -88,26 +94,33 @@ public class LoginController extends HttpServlet {
             if(us.UserLogin(username, password) && us.getUserDetails(username).get(0).getRole().equals("customer")){
 
                 session.setAttribute("user",us.getUserDetails(username).get(0).getUsername());
-                session.setMaxInactiveInterval(30);
+                session.setAttribute("user_role",us.getUserDetails(username).get(0).getRole());
+                session.setMaxInactiveInterval(60);
                 
-                response.sendRedirect("/customer");
+                response.sendRedirect("/OnlinePizza/Customer/customerHome.jsp");
             }else if(us.UserLogin(username, password) && us.getUserDetails(username).get(0).getRole().equals("admin")){
                 
                 session.setAttribute("user",us.getUserDetails(username).get(0).getUsername());
-                session.setMaxInactiveInterval(30);
+                session.setAttribute("user_role", us.getUserDetails(username).get(0).getRole());
+                session.setMaxInactiveInterval(60);
                 
-                response.sendRedirect("/admin");
+                response.sendRedirect("/OnlinePizza/Admin/adminHome.jsp");
                 
             }else{
-                response.sendRedirect("/error404");
+                request.setAttribute("Message", "Authentication failed !");
+                request.setAttribute("username", username);
+                rd = request.getRequestDispatcher("Home/login.jsp"); //return the jsp
+                rd.forward(request, response);
+                //response.sendRedirect("/OnlinePizza/login.jsp");
             } 
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvalidKeySpecException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }
+ }
+    
+
 
     /**
      * Returns a short description of the servlet.

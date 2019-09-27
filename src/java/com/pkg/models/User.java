@@ -18,16 +18,17 @@ public class User {
     private String username;
     private String password;
     private String address;
-    private int contact_number;
+    private String contact_number;
     private String role;
     
     //constructor
-    public User(int id,String firstName, String lastName, String email, String username,String password,String address,int contact_number,String role){
+    public User(int id,String firstName, String lastName, String email, String username,String password,String address,String contact_number,String role){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.username = username;
+        this.password = password;
         this.address = address;
         this.contact_number = contact_number;
         this.role = role;
@@ -116,14 +117,14 @@ public class User {
     /**
      * @return the contact_number
      */
-    public int getContact_number() {
+    public String getContact_number() {
         return contact_number;
     }
 
     /**
      * @param contact_number the contact_number to set
      */
-    public void setContact_number(int contact_number) {
+    public void setContact_number(String contact_number) {
         this.contact_number = contact_number;
     }
     

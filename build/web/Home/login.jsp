@@ -13,23 +13,40 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">  
-        <link href="bootstrap.min.css" rel="stylesheet">
-        <link href="_bootswatch.scss" rel="stylesheet">
-        <link href="bootstrap.css" rel="stylesheet">
-        <link href="_variables.scss" rel="stylesheet">
         <link href="css/styles.css" rel="stylesheet">
         
         <title>Online Pizza Ordering</title>
     </head>
     <body>
-        
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Pizza Hut</a>
+
+            <div class="collapse navbar-collapse" id="navbarColor02">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/OnlinePizza">Home</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="">Login<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/OnlinePizza/Home/signup.jsp">Sign Up</a>
+                </li>
+              </ul>
+            </div>
+        </nav>
         <div class="col-lg-4 col-md-6 col-sm-6">
             <h1>Login</h1>
-        <form>
+        <c:if test="${not empty Message}">
+            <br/>
+            <h4 style="color:red">${Message}</h4>
+            <c:remove var="Message"/>
+        </c:if> 
+        <form action="/OnlinePizza/LoginController" method="post">
         <fieldset>
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" name="username" class="form-control" id="username" aria-describedby="username" placeholder="Username">
+            <input type="text" name="username" class="form-control" id="username" aria-describedby="username" value="${username}" placeholder="Username">
           </div>
           <div class="form-group">
             <label for="password">Password</label>
@@ -37,6 +54,7 @@
           </div>
 
           <button type="submit" class="btn btn-primary">Login</button>
+          <br/>
         </fieldset>
         </form> 
         </div>        

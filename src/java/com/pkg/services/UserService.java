@@ -94,7 +94,6 @@ public class UserService {
     //end of password hashing
     
     public String userRegistration(User user) throws NoSuchAlgorithmException, InvalidKeySpecException{
-        
         user.setPassword(generateStrongPasswordHash(user.getPassword()));
         return ud.signUp(user);       
     }//userRegistration method
