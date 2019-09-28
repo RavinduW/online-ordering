@@ -19,6 +19,22 @@
         <servlet-name>SignUpController</servlet-name>
         <url-pattern>/SignUpController</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>AdminSessionFilter</filter-name>
+        <filter-class>com.pkg.filters.AdminSessionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminSessionFilter</filter-name>
+        <url-pattern>/Admin/*</url-pattern>
+    </filter-mapping>
+        <filter>
+        <filter-name>CustomerSessionFilter</filter-name>
+        <filter-class>com.pkg.filters.CustomerSessionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CustomerSessionFilter</filter-name>
+        <url-pattern>/Customer/*</url-pattern>
+    </filter-mapping>
     <session-config>
         <session-timeout>
             1
