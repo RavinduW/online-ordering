@@ -32,11 +32,11 @@ public class AdminSessionFilter implements Filter {
         //System.out.println(session.getAttribute("user"));
         if (session == null || session.getAttribute("user") == null || !session.getAttribute("user_role").equals("admin")) {   //checking whether the session exists
             this.context.log("Unauthorized access request");
-            System.out.println("Unauthorized");
+            //System.out.println("Unauthorized");
             res.sendRedirect(req.getContextPath() + "/Home/login.jsp");
         } else {
             // pass the request along the filter chain
-            System.out.println("Pass the chain");
+            //System.out.println("Pass the chain");
             
             if(session.getAttribute("user_role").equals("admin")){
                 chain.doFilter(request, response);

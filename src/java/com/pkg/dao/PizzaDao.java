@@ -5,10 +5,16 @@
  */
 package com.pkg.dao;
 
+import com.pkg.models.Pizza;
+import java.util.List;
+
 /**
  *
  * @author Ravindu Weerasnghe
  */
 public interface PizzaDao {
     
+    public boolean addPizza(Pizza pizza);
+    
+    public List<Pizza> getPizzaDetails();
 }

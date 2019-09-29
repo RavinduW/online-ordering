@@ -14,5 +14,10 @@
     <body>
         <h1>Welcome to the Admin Home Page</h1>
         <a href="/OnlinePizza/LoginController">Logout</a>
+        <br/><br/>
+        <a href="/OnlinePizza/Admin/addPizza.jsp">Add Pizza</a>
+        <a href="/OnlinePizza/Admin/addPizza.jsp">View Pizza</a>
+        <a href="/OnlinePizza/Admin/addPizza.jsp">View Order</a>
+        <a href="/OnlinePizza/Admin/addPizza.jsp">View Sales</a>
     </body>
 </html>

@@ -14,14 +14,17 @@ public class Pizza {
     private int id;
     private String name;
     private double price;
-    private boolean status;
+    private String status;
+    private byte[] image;
+    private String base64Image;
     
     //constructor
-    public Pizza(int id,String name,double price,boolean status){
+    public Pizza(int id,String name,double price,String status,byte[]image){
         this.id = id;
         this.name = name;
         this.price = price;
         this.status = status;
+        this.image = image;
     }
 
     //starting of getters and setters
@@ -70,16 +73,45 @@ public class Pizza {
     /**
      * @return the status
      */
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
     /**
      * @param status the status to set
      */
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
+    
+    /**
+     * @return the image
+     */
+    public byte[] getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+    
+    /**
+     * @return the base64Image
+     */
+    public String getBase64Image() {
+        return base64Image;
+    }
+
+    /**
+     * @param base64Image the base64Image to set
+     */
+    public void setBase64Image(String base64Image) {
+        this.base64Image = base64Image;
+    }
+    
     //end of setters and getters
     
 }//class Pizza
