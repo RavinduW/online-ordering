@@ -25,5 +25,17 @@ public class PizzaService {
     public List<Pizza> viewPizza(){
         return pd.getPizzaDetails();
     }
-
+    
+    //public List<Pizza> viewPizzaItem(int id){
+        
+    //}
+    
+    public boolean updatePizzaByAdmin(int id){
+        return true;
+    }
+    
+    public boolean deletePizzaByAdmin(int id){
+        return true;
+    }
+   
 }

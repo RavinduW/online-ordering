@@ -120,5 +120,9 @@ public class UserService {
     public List<User> getUserDetails(String username){
         return ud.userDetails(username);
     }//getUserDetails method
+    
+    //public List<User> getUsers(){
+        
+    //}
 }    
 
