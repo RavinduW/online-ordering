@@ -102,7 +102,7 @@ public class PizzaDaoImpl implements PizzaDao{
             }          
         }
         return success; 
-    }
+    }//addPizza
     
     public List<Pizza> getPizzaDetails(){
        
@@ -165,6 +165,109 @@ public class PizzaDaoImpl implements PizzaDao{
             }           
         }
        return pizzadetails;
-    }
+    }//getPizzaDetails
     
-}
+    public boolean updatePizza(int id,Pizza pizza){
+    
+        query = "UPDATE pizzaitems SET name=?,price=?,status=?,image=? WHERE id=?";
+                
+        try{
+            
+            currentConnection = ConnectionManager.getConnection();
+            ps = currentConnection.prepareStatement(query);
+            ps.setString(1, pizza.getName());
+            ps.setDouble(2, pizza.getPrice());
+            ps.setString(3, pizza.getStatus());
+            
+            if(pizza.getImage()!= null){
+                ps.setBlob(4, new ByteArrayInputStream(pizza.getImage()));
+            }
+            
+            // sends the statement to the database server
+            int row = ps.executeUpdate();
+            if (row > 0) {
+             System.out.println("File uploaded and updated database");
+             success = true;
+            }
+            
+            ps.executeUpdate();
+            
+        }catch(Exception e){
+            System.out.println(e);
+            success = false;
+        }finally{
+            if(currentConnection != null){
+                try{
+                    currentConnection.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(ps != null){
+                try{
+                    ps.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(rs != null){
+                try{
+                    rs.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }       
+        }
+        return success;
+    }//updatePizza
+    
+    public boolean deletePizza(int id){
+        
+        query = "DELETE FROM pizzaitems WHERE id=?";
+        
+        try{
+            currentConnection = ConnectionManager.getConnection();
+            ps = currentConnection.prepareStatement(query);
+            ps.setInt(1, id);
+            
+           int row = ps.executeUpdate();
+            if (row > 0) {
+             System.out.println("File uploaded and updated database");
+             success = true;
+            }
+            
+        }catch(Exception e){
+            System.out.println(e);
+            success = false;
+        }finally{
+            if(currentConnection != null){
+                try{
+                    currentConnection.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(ps != null){
+                try{
+                    ps.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(rs != null){
+                try{
+                    rs.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }     
+        }
+        return success;
+    }//deletePizza
+    
+    
+}//PizzaDaoImpl class
