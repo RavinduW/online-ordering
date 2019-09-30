@@ -21,4 +21,7 @@ public interface PizzaDao {
     public boolean updatePizza(int id,Pizza pizza);
     
     public boolean deletePizza(int id);
+    
+    public List<Pizza> findById(int id);
+    
 }

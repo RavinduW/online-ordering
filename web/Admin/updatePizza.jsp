@@ -3,15 +3,37 @@
     Created on : Sep 29, 2019, 1:01:31 AM
     Author     : Ravindu Weerasnghe
 --%>
-
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+            <title>Online Pizza Ordering</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Update Pizza Details</h1>
+        <c:forEach items="${FindById}" var="p">
+            <form action="/OnlinePizza/UpdatePizzaController" method="post" enctype = "multipart/form-data">
+                
+                <input type="hidden" name="id" value="${p.id}"/>
+                
+                Name:<br/>
+                <input type="text" name="name" value="${p.name}" style="width: 200px" />
+                <br/><br/>
+                Price:<br/>
+                <input type="number" name="price" value="${p.price}"  style="width: 200px" />
+                <br/><br/>
+                Status:<br/>
+                <input type="radio" name="status" value="Available" ${p.status=="Available" ? 'checked' :''}/>Available
+                <input type="radio" name="status" value="Unavailable" ${p.status=="Unavailable" ? 'checked' :''}/>Unavailable
+                <br/><br/>
+                Pizza Image:<br/>
+                <img src="data:image/jpg;base64,${p.base64Image}" width="400" height="300"/>
+                <input type="file" name="image" size="50"/>
+                <br/>
+                <button type="submit">Edit</button>
+            </form>
+        </c:forEach>
     </body>
 </html>

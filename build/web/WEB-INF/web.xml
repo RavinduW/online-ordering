@@ -19,6 +19,14 @@
         <servlet-name>ViewPizzaController</servlet-name>
         <servlet-class>com.pkg.controllers.ViewPizzaController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdatePizzaController</servlet-name>
+        <servlet-class>com.pkg.controllers.UpdatePizzaController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePizzaController</servlet-name>
+        <servlet-class>com.pkg.controllers.DeletePizzaController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -34,6 +42,8 @@
     <filter-mapping>
         <filter-name>AdminSessionFilter</filter-name>
         <url-pattern>/Admin/*</url-pattern>
+        <url-pattern>/AddPizzaController</url-pattern>
+        <url-pattern>/ViewPizzaController</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>CustomerSessionFilter</filter-name>
@@ -50,6 +60,14 @@
     <servlet-mapping>
         <servlet-name>ViewPizzaController</servlet-name>
         <url-pattern>/ViewPizzaController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePizzaController</servlet-name>
+        <url-pattern>/UpdatePizzaController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePizzaController</servlet-name>
+        <url-pattern>/DeletePizzaController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

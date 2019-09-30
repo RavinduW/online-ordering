@@ -26,12 +26,12 @@ public class PizzaService {
         return pd.getPizzaDetails();
     }
     
-    //public List<Pizza> viewPizzaItem(int id){
-        
-    //}
+    public List<Pizza> viewPizzaItem(int id){
+        return pd.findById(id);
+    }
     
-    public boolean updatePizzaByAdmin(int id){
-        return true;
+    public boolean updatePizzaByAdmin(int id,Pizza pizza){
+        return pd.updatePizza(id, pizza);
     }
     
     public boolean deletePizzaByAdmin(int id){

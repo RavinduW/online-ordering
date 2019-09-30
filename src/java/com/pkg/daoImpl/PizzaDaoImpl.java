@@ -178,6 +178,7 @@ public class PizzaDaoImpl implements PizzaDao{
             ps.setString(1, pizza.getName());
             ps.setDouble(2, pizza.getPrice());
             ps.setString(3, pizza.getStatus());
+            ps.setInt(5, id);
             
             if(pizza.getImage()!= null){
                 ps.setBlob(4, new ByteArrayInputStream(pizza.getImage()));
@@ -269,5 +270,67 @@ public class PizzaDaoImpl implements PizzaDao{
         return success;
     }//deletePizza
     
+    public List<Pizza> findById(int id){
+        
+        query = "SELECT * FROM pizzaitems WHERE id=?";
+        List<Pizza> pizzadetails = new ArrayList<>();
+        
+        try{
+            currentConnection = ConnectionManager.getConnection();
+            ps = currentConnection.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            while(rs.next()){
+                Blob blob = rs.getBlob("image");
+                 
+                InputStream inputStream = blob.getBinaryStream();
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                 
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);                  
+                }
+                 
+                byte[] imageBytes = outputStream.toByteArray();
+                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                
+
+                Pizza pizza = new Pizza(rs.getInt(1),rs.getString(2),rs.getDouble(3),rs.getString(4),imageBytes);
+                pizza.setBase64Image(base64Image);
+                pizzadetails.add(pizza);
+                inputStream.close();
+                outputStream.close();
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }finally{
+            if(currentConnection != null){
+                try{
+                    currentConnection.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(ps != null){
+                try{
+                    ps.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(rs != null){
+                try{
+                    rs.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }          
+        }
+        return pizzadetails;
+    }//findById
     
 }//PizzaDaoImpl class

@@ -82,7 +82,7 @@ public class AddPizzaController extends HttpServlet {
         //processRequest(request, response);
         PizzaService ps = new PizzaService();
         String name = request.getParameter("name");
-        int price = Integer.parseInt(request.getParameter("price"));
+        double price = Double.parseDouble(request.getParameter("price"));
         String status = request.getParameter("status");
         
         InputStream inputStream = null; // input stream of the upload file
