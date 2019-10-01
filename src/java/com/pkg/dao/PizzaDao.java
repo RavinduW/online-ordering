@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @author Ravindu Weerasnghe
  */
+
 public interface PizzaDao {
     
     public boolean addPizza(Pizza pizza);
@@ -23,5 +24,9 @@ public interface PizzaDao {
     public boolean deletePizza(int id);
     
     public List<Pizza> findById(int id);
+    
+    public boolean updatePizzaImage(int id,Pizza pizza);
+    
+    
     
 }

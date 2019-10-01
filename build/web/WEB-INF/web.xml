@@ -27,6 +27,10 @@
         <servlet-name>DeletePizzaController</servlet-name>
         <servlet-class>com.pkg.controllers.DeletePizzaController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdatePizzaImageController</servlet-name>
+        <servlet-class>com.pkg.controllers.UpdatePizzaImageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -68,6 +72,10 @@
     <servlet-mapping>
         <servlet-name>DeletePizzaController</servlet-name>
         <url-pattern>/DeletePizzaController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePizzaImageController</servlet-name>
+        <url-pattern>/UpdatePizzaImageController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -14,7 +14,7 @@
     <body>
         <h1>Update Pizza Details</h1>
         <c:forEach items="${FindById}" var="p">
-            <form action="/OnlinePizza/UpdatePizzaController" method="post" enctype = "multipart/form-data">
+            <form action="/OnlinePizza/UpdatePizzaController" method="post">
                 
                 <input type="hidden" name="id" value="${p.id}"/>
                 
@@ -30,10 +30,18 @@
                 <br/><br/>
                 Pizza Image:<br/>
                 <img src="data:image/jpg;base64,${p.base64Image}" width="400" height="300"/>
-                <input type="file" name="image" size="50"/>
                 <br/>
                 <button type="submit">Edit</button>
             </form>
-        </c:forEach>
+        <h3>Change The Image</h3>
+        <form method="post" action="/OnlinePizza/UpdatePizzaImageController" enctype = "multipart/form-data">
+             <input type="hidden" name="id" value="${p.id}"/> 
+             <input type="hidden" name="name" value="${p.name}"/>
+             <input type="hidden" name="price" value="${p.price}"/>
+             <input type="hidden" name="status" value="${p.status}"/>
+             <input type="file" name="image" size="50" />
+             <button type="submit">Change Image</button>
+        </form>
+      </c:forEach>
     </body>
 </html>

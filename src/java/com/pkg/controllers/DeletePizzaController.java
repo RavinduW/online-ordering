@@ -5,6 +5,7 @@
  */
 package com.pkg.controllers;
 
+import com.pkg.services.PizzaService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -70,7 +71,16 @@ public class DeletePizzaController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        
+        PizzaService ps = new PizzaService();
+        
+        int id = Integer.parseInt(request.getParameter("id"));
+            
+        ps.deletePizzaByAdmin(id);
+        
+        response.sendRedirect("/OnlinePizza/ViewPizzaController");
+        
     }
 
     /**

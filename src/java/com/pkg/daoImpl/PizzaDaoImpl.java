@@ -48,8 +48,6 @@ public class PizzaDaoImpl implements PizzaDao{
         query = "INSERT INTO pizzaitems(name,price,status,image) VALUES(?,?,?,?) ";
         
         try{
-        // obtains the upload file part in this multipart request
-        //Part filePart = request.getPart("photo");
         currentConnection = ConnectionManager.getConnection();
         
         
@@ -169,7 +167,7 @@ public class PizzaDaoImpl implements PizzaDao{
     
     public boolean updatePizza(int id,Pizza pizza){
     
-        query = "UPDATE pizzaitems SET name=?,price=?,status=?,image=? WHERE id=?";
+        query = "UPDATE pizzaitems SET name=?,price=?,status=? WHERE id=?";
                 
         try{
             
@@ -178,20 +176,14 @@ public class PizzaDaoImpl implements PizzaDao{
             ps.setString(1, pizza.getName());
             ps.setDouble(2, pizza.getPrice());
             ps.setString(3, pizza.getStatus());
-            ps.setInt(5, id);
-            
-            if(pizza.getImage()!= null){
-                ps.setBlob(4, new ByteArrayInputStream(pizza.getImage()));
-            }
+            ps.setInt(4, id);
             
             // sends the statement to the database server
             int row = ps.executeUpdate();
             if (row > 0) {
-             System.out.println("File uploaded and updated database");
+             System.out.println("Updated database");
              success = true;
             }
-            
-            ps.executeUpdate();
             
         }catch(Exception e){
             System.out.println(e);
@@ -332,5 +324,65 @@ public class PizzaDaoImpl implements PizzaDao{
         }
         return pizzadetails;
     }//findById
+    
+    @Override
+    public boolean updatePizzaImage(int id,Pizza pizza){
+        
+        query = "UPDATE pizzaitems SET name=?,price=?,status=?,image=? WHERE id=?";
+        
+        try{
+            currentConnection = ConnectionManager.getConnection();
+
+            String querySetLimit = "SET GLOBAL max_allowed_packet=16177215";  // 10 MB
+            Statement stSetLimit = currentConnection.createStatement();
+            stSetLimit.execute(querySetLimit);
+
+            ps = currentConnection.prepareStatement(query);
+
+            ps.setString(1, pizza.getName());
+            ps.setDouble(2, pizza.getPrice());
+            ps.setString(3, pizza.getStatus());
+            ps.setInt(5, id);
+
+            if(pizza.getImage()!= null){
+                ps.setBlob(4, new ByteArrayInputStream(pizza.getImage()));
+            }
+            // sends the statement to the database server
+            int row = ps.executeUpdate();
+            if (row > 0) {
+                 System.out.println("File uploaded and saved into database");
+                 success = true;
+            }
+            
+        }catch(Exception e){
+            System.out.println(e);
+            success = false;
+        }finally{
+            if(currentConnection != null){
+                try{
+                    currentConnection.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(ps != null){
+                try{
+                    ps.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(rs != null){
+                try{
+                    rs.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }                
+        }
+        return success;
+    }//updatePizzaImage
     
 }//PizzaDaoImpl class

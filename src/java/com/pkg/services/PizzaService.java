@@ -35,7 +35,11 @@ public class PizzaService {
     }
     
     public boolean deletePizzaByAdmin(int id){
-        return true;
+        return pd.deletePizza(id);
+    }
+    
+    public boolean updatePizzaImage(int id,Pizza pizza){
+        return pd.updatePizzaImage(id,pizza);
     }
    
 }
