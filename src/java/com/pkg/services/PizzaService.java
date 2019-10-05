@@ -41,5 +41,8 @@ public class PizzaService {
     public boolean updatePizzaImage(int id,Pizza pizza){
         return pd.updatePizzaImage(id,pizza);
     }
-   
+    
+    public List<Pizza> viewAvailablePizza(){
+        return pd.getAvailablePizza();
+    }
 }

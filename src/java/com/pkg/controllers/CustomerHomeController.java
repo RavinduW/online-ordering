@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ravindu Weerasnghe
  */
-public class ViewPizzaController extends HttpServlet {
+public class CustomerHomeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +31,15 @@ public class ViewPizzaController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ViewPizzaController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ViewPizzaController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
+            PizzaService ps = new PizzaService();
+
+            request.setAttribute("pizza", ps.viewAvailablePizza());
+            
+            String page = "Customer/viewAvailablePizza.jsp";
+            
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher(page);
+            requestDispatcher.forward(request, response); 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,14 +54,7 @@ public class ViewPizzaController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-            PizzaService ps = new PizzaService();
-
-            request.setAttribute("pizza", ps.viewPizza());
-            
-            String page = "Admin/viewPizza.jsp";
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher(page);
-            requestDispatcher.forward(request, response);   
+        processRequest(request, response);
     }
 
     /**
@@ -79,7 +68,7 @@ public class ViewPizzaController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /**

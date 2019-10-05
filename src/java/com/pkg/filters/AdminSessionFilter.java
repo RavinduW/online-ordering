@@ -29,7 +29,10 @@ public class AdminSessionFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         HttpSession session = req.getSession(false);
-        //System.out.println(session.getAttribute("user"));
+       
+        //set a header to cache control
+        res.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
+        
         if (session == null || session.getAttribute("user") == null || !session.getAttribute("user_role").equals("admin")) {   //checking whether the session exists
             this.context.log("Unauthorized access request");
             //System.out.println("Unauthorized");

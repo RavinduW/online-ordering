@@ -333,7 +333,7 @@ public class PizzaDaoImpl implements PizzaDao{
         try{
             currentConnection = ConnectionManager.getConnection();
 
-            String querySetLimit = "SET GLOBAL max_allowed_packet=16177215";  // 10 MB
+            String querySetLimit = "SET GLOBAL max_allowed_packet=16177215";  // 16 MB
             Statement stSetLimit = currentConnection.createStatement();
             stSetLimit.execute(querySetLimit);
 
@@ -384,5 +384,70 @@ public class PizzaDaoImpl implements PizzaDao{
         }
         return success;
     }//updatePizzaImage
+    
+    //view avilable pizzas for customer
+    public List<Pizza> getAvailablePizza(){
+       
+       List <Pizza> pizzadetails = new ArrayList<>();
+       query = "SELECT * FROM pizzaitems WHERE status=?";
+        
+       try{
+            currentConnection = ConnectionManager.getConnection();
+            ps = currentConnection.prepareStatement(query);
+            ps.setString(1, "Available");
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Blob blob = rs.getBlob("image");
+                 
+                InputStream inputStream = blob.getBinaryStream();
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                 
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);                  
+                }
+                 
+                byte[] imageBytes = outputStream.toByteArray();
+                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                
+
+                Pizza pizza = new Pizza(rs.getInt(1),rs.getString(2),rs.getDouble(3),rs.getString(4),imageBytes);
+                pizza.setBase64Image(base64Image);
+                pizzadetails.add(pizza);
+                inputStream.close();
+                outputStream.close();
+            }
+            
+        }catch(Exception e){
+            System.out.println(e);
+        }finally{
+            if(currentConnection != null){
+                try{
+                    currentConnection.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(ps != null){
+                try{
+                    ps.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(rs != null){
+                try{
+                    rs.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }           
+        }
+       return pizzadetails;
+    }//getAvailablePizza
     
 }//PizzaDaoImpl class

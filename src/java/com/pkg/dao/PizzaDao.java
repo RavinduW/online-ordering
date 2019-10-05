@@ -27,6 +27,6 @@ public interface PizzaDao {
     
     public boolean updatePizzaImage(int id,Pizza pizza);
     
-    
+    public List<Pizza> getAvailablePizza();
     
 }

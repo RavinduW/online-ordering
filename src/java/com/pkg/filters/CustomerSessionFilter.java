@@ -30,7 +30,11 @@ public class CustomerSessionFilter implements Filter {
 
         HttpSession session = req.getSession(false);
         //System.out.println(session.getAttribute("user"));
-        if (session == null || session.getAttribute("user") == null || !session.getAttribute("user_role").equals("admin")) {   //checking whether the session exists
+        
+        //set a header to cache control
+        res.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
+        
+        if (session == null || session.getAttribute("user") == null || !session.getAttribute("user_role").equals("customer")) {   //checking whether the session exists
             this.context.log("Unauthorized access request");
             //System.out.println("Unauthorized");
             res.sendRedirect(req.getContextPath() + "/Home/login.jsp");

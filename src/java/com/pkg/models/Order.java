@@ -13,20 +13,20 @@ public class Order {
     
     private int id;
     private int user_id; //need to refer users table
-    private String order_name;
+    private String time; //need to refer pizza table
+    //private String time_stamp;
     private double price;
-    private String requested_time;
+    private boolean payment_status;
     
     //constructor
-    public Order(int id,int user_id,String order_name,double price, String requested_time){
+    public Order(int id,int user_id,String time,double price,boolean payment_status){
         this.id = id;
         this.user_id = user_id;
-        this.order_name = order_name;
+        this.time = time;
         this.price = price;
-        this.requested_time = requested_time;
+        this.payment_status = payment_status;
     }
 
-    //started getters and setters
     /**
      * @return the id
      */
@@ -56,17 +56,17 @@ public class Order {
     }
 
     /**
-     * @return the order_name
+     * @return the time
      */
-    public String getOrder_name() {
-        return order_name;
+    public String getTime() {
+        return time;
     }
 
     /**
-     * @param order_name the order_name to set
+     * @param time the time to set
      */
-    public void setOrder_name(String order_name) {
-        this.order_name = order_name;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     /**
@@ -84,19 +84,19 @@ public class Order {
     }
 
     /**
-     * @return the requested_time
+     * @return the payment_status
      */
-    public String getRequested_time() {
-        return requested_time;
+    public boolean isPayment_status() {
+        return payment_status;
     }
 
     /**
-     * @param requested_time the requested_time to set
+     * @param payment_status the payment_status to set
      */
-    public void setRequested_time(String requested_time) {
-        this.requested_time = requested_time;
+    public void setPayment_status(boolean payment_status) {
+        this.payment_status = payment_status;
     }
-    //end of getters and setters
+
     
     
 }//class Order

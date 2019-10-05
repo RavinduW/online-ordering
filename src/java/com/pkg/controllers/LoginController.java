@@ -92,12 +92,12 @@ public class LoginController extends HttpServlet {
         
         try {
             if(us.UserLogin(username, password) && us.getUserDetails(username).get(0).getRole().equals("customer")){
-
                 session.setAttribute("user",us.getUserDetails(username).get(0).getUsername());
                 session.setAttribute("user_role",us.getUserDetails(username).get(0).getRole());
-                session.setMaxInactiveInterval(30);
+                session.setMaxInactiveInterval(60);
                 
                 response.sendRedirect("/OnlinePizza/Customer/customerHome.jsp");
+                
             }else if(us.UserLogin(username, password) && us.getUserDetails(username).get(0).getRole().equals("admin")){
                 
                 session.setAttribute("user",us.getUserDetails(username).get(0).getUsername());

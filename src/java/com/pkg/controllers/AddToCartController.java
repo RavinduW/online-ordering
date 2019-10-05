@@ -5,10 +5,8 @@
  */
 package com.pkg.controllers;
 
-import com.pkg.services.PizzaService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ravindu Weerasnghe
  */
-public class ViewPizzaController extends HttpServlet {
+public class AddToCartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +35,10 @@ public class ViewPizzaController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewPizzaController</title>");            
+            out.println("<title>Servlet AddToCartController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewPizzaController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddToCartController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,14 +56,7 @@ public class ViewPizzaController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-            PizzaService ps = new PizzaService();
-
-            request.setAttribute("pizza", ps.viewPizza());
-            
-            String page = "Admin/viewPizza.jsp";
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher(page);
-            requestDispatcher.forward(request, response);   
+        processRequest(request, response);
     }
 
     /**

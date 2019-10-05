@@ -31,6 +31,14 @@
         <servlet-name>UpdatePizzaImageController</servlet-name>
         <servlet-class>com.pkg.controllers.UpdatePizzaImageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddToCartController</servlet-name>
+        <servlet-class>com.pkg.controllers.AddToCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerHomeController</servlet-name>
+        <servlet-class>com.pkg.controllers.CustomerHomeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -48,6 +56,7 @@
         <url-pattern>/Admin/*</url-pattern>
         <url-pattern>/AddPizzaController</url-pattern>
         <url-pattern>/ViewPizzaController</url-pattern>
+        <url-pattern>/UpdatePizzaController</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>CustomerSessionFilter</filter-name>
@@ -56,6 +65,7 @@
     <filter-mapping>
         <filter-name>CustomerSessionFilter</filter-name>
         <url-pattern>/Customer/*</url-pattern>
+        <url-pattern>/CustomerHomeController</url-pattern>
     </filter-mapping>
     <servlet-mapping>
         <servlet-name>AddPizzaController</servlet-name>
@@ -76,6 +86,14 @@
     <servlet-mapping>
         <servlet-name>UpdatePizzaImageController</servlet-name>
         <url-pattern>/UpdatePizzaImageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCartController</servlet-name>
+        <url-pattern>/AddToCartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerHomeController</servlet-name>
+        <url-pattern>/CustomerHomeController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
