@@ -7,6 +7,7 @@ package com.pkg.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +41,9 @@ public class ConnectionManager {
         
         //print out a success and error msgs regarding the db connection
         if(con != null){
+            String query = "SET GLOBAL max_allowed_packet=16177215";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.executeUpdate();
             System.out.println("Connected to database");
         }else{
             System.out.println("Connection is failed");

@@ -5,25 +5,20 @@
  */
 package com.pkg.controllers;
 
-import com.pkg.models.Pizza;
-import com.pkg.services.PizzaService;
+import com.pkg.services.CartService;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import org.apache.commons.io.IOUtils;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Ravindu Weerasnghe
  */
-@MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
-public class AddPizzaController extends HttpServlet {
+public class ConfirmOrderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +37,10 @@ public class AddPizzaController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddPizzaController</title>");            
+            out.println("<title>Servlet ConfirmOrderController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddPizzaController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ConfirmOrderController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,9 +58,7 @@ public class AddPizzaController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        
-        
+        processRequest(request, response);
     }
 
     /**
@@ -80,32 +73,14 @@ public class AddPizzaController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        PizzaService ps = new PizzaService();
-        String name = request.getParameter("name");
-        double price = Double.parseDouble(request.getParameter("price"));
-        String status = request.getParameter("status");
         
-        InputStream inputStream = null; // input stream of the upload file
-        byte [] bytes = null;
+        CartService cs = new CartService();
+        HttpSession session = request.getSession(false);
         
-        // obtains the upload file part in this multipart request
-        Part filePart = request.getPart("image");
-        if (filePart != null) {
-            // prints out some information for debugging
-            System.out.println(filePart.getName());
-            System.out.println(filePart.getSize());
-            System.out.println(filePart.getContentType());
-             
-            // obtains input stream of the upload file
-            inputStream = filePart.getInputStream();
-            bytes = IOUtils.toByteArray(inputStream);
+        if(cs.makeOrder(Integer.parseInt(session.getAttribute("user_id").toString()))){
+            response.sendRedirect("OnlinePizza/Customer/customerHome.jsp");
         }
         
-        Pizza pizza = new Pizza(0,name,price,status,bytes);
-        
-        if(ps.addPizzaByAdmin(pizza)){
-            response.sendRedirect("/OnlinePizza/ViewPizzaController");
-        }
         
     }
 

@@ -3,7 +3,7 @@
     Created on : Sep 22, 2019, 10:57:43 PM
     Author     : Ravindu Weerasnghe
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,11 +14,11 @@
         <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">  
         <link href="css/styles.css" rel="stylesheet">
-        
+      
         <title>Online Pizza Ordering</title>
     </head>
     <body>
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">Pizza Hut</a>
 
             <div class="collapse navbar-collapse" id="navbarColor02">
@@ -35,29 +35,34 @@
               </ul>
             </div>
         </nav>
-        <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="loginPage">
+           <div class="col-lg-4 col-md-6 col-sm-6 offset-4" style="margin-top: 80px;border-style: solid;border-width: 1px 1px 1px 1px;padding-bottom: 20px">
             <h1>Login</h1>
-        <c:if test="${not empty Message}">
-            <br/>
-            <h4 style="color:red">${Message}</h4>
-            <c:remove var="Message"/>
-        </c:if> 
-        <form action="/OnlinePizza/LoginController" method="post">
-        <fieldset>
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" name="username" class="form-control" id="username" aria-describedby="username" value="${username}" placeholder="Username">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" class="form-control" id="password" placeholder="Password">
-          </div>
+            <c:if test="${not empty Message}">
+                <br/>
+                <h4 style="color:red">${Message}</h4>
+                <c:remove var="Message"/>
+            </c:if> 
+            <form action="/OnlinePizza/LoginController" method="post">
+            <fieldset>
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" class="form-control" id="username" aria-describedby="username" value="${username}" placeholder="Username">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+              </div>
 
-          <button type="submit" class="btn btn-primary">Login</button>
-          <br/>
-        </fieldset>
-        </form> 
-        </div>        
+              <button type="submit" class="btn btn-primary">Login</button>
+              <br/>
+            </fieldset>
+            </form> 
+        </div> 
+        </div>
+
+       
+       
         
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>

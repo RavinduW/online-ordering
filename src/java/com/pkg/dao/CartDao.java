@@ -16,4 +16,6 @@ public interface CartDao {
     public boolean addItemToCart(Cart cart);
     
     public List<Cart> viewCartItems(int user_id);
+    
+    public boolean makeOrder(int user_id);
 }

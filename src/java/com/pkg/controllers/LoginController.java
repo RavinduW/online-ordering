@@ -96,8 +96,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("user",us.getUserDetails(username).get(0).getUsername());
                 session.setAttribute("user_role",us.getUserDetails(username).get(0).getRole());
                 session.setMaxInactiveInterval(3600);
-                
-                response.sendRedirect("/OnlinePizza/Customer/customerHome.jsp");
+                response.sendRedirect("/OnlinePizza/CustomerPanelController");
                 
             }else if(us.UserLogin(username, password) && us.getUserDetails(username).get(0).getRole().equals("admin")){
                 session.setAttribute("user_id",us.getUserDetails(username).get(0).getId());
@@ -105,7 +104,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("user_role", us.getUserDetails(username).get(0).getRole());
                 session.setMaxInactiveInterval(3600);
                 
-                response.sendRedirect("/OnlinePizza/Admin/adminHome.jsp");
+                response.sendRedirect("/OnlinePizza/ViewAdminPanelController");
                 
             }else{
                 request.setAttribute("Message", "Authentication failed !");

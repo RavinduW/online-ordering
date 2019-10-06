@@ -13,16 +13,13 @@ public class Order {
     
     private int id;
     private int user_id; //need to refer users table
-    private String time; //need to refer pizza table
-    //private String time_stamp;
     private double price;
     private boolean payment_status;
     
     //constructor
-    public Order(int id,int user_id,String time,double price,boolean payment_status){
+    public Order(int id,int user_id,double price,boolean payment_status){
         this.id = id;
         this.user_id = user_id;
-        this.time = time;
         this.price = price;
         this.payment_status = payment_status;
     }
@@ -53,20 +50,6 @@ public class Order {
      */
     public void setUser_id(int user_id) {
         this.user_id = user_id;
-    }
-
-    /**
-     * @return the time
-     */
-    public String getTime() {
-        return time;
-    }
-
-    /**
-     * @param time the time to set
-     */
-    public void setTime(String time) {
-        this.time = time;
     }
 
     /**

@@ -36,7 +36,7 @@
             </div>
         </nav>
   
-        <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-6 offset-4" style="border-style: solid;border-width: 1px 1px 1px 1px;padding-bottom: 20px">
             <h1>Sign Up</h1>
         <c:if test="${not empty success}">
             <br/>

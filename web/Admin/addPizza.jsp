@@ -16,7 +16,33 @@
         <title>Online Pizza Ordering</title>
     </head>
     <body>
-        <h1>Add Pizza</h1>
+         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Admin Panel</a>
+
+            <div class="collapse navbar-collapse" id="navbarColor02">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/OnlinePizza/ViewAdminPanelController">Admin Home</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="">Add Pizza<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/OnlinePizza/ViewPizzaController">View Pizza</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">View Orders</a>
+                </li>
+              </ul>
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/OnlinePizza/LoginController">Logout</a>
+                </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="col-lg-4 col-md-6 col-sm-6 offset-4" style="margin-top: 80px;border-style: solid;border-width: 1px 1px 1px 1px;padding-bottom: 20px">
+                    <h1>Add Pizza</h1>
         <form method = "post" enctype = "multipart/form-data" action = "/OnlinePizza/AddPizzaController">
         <fieldset>
           <div class="form-group">
@@ -43,6 +69,8 @@
             
             
         </form>
+        </div>
+
           
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>

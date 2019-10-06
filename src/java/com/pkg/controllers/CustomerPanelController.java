@@ -5,9 +5,9 @@
  */
 package com.pkg.controllers;
 
-import com.pkg.services.PizzaService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ravindu Weerasnghe
  */
-public class DeletePizzaController extends HttpServlet {
+public class CustomerPanelController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,19 +30,9 @@ public class DeletePizzaController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DeletePizzaController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DeletePizzaController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
+        RequestDispatcher rd = request.getRequestDispatcher("Customer/customerHome.jsp") ;
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -71,16 +61,7 @@ public class DeletePizzaController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        
-        PizzaService ps = new PizzaService();
-        
-        int id = Integer.parseInt(request.getParameter("id"));
-            
-        ps.deletePizzaByAdmin(id);
-        System.out.println("deleyeedd");
-        response.sendRedirect("/OnlinePizza/ViewPizzaController");
-        
+        processRequest(request, response);
     }
 
     /**

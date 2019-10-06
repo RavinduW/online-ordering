@@ -76,7 +76,7 @@ public class CartDaoImpl implements CartDao{
     public List<Cart> viewCartItems(int user_id){
         
         List<Cart> cartItems = new ArrayList<>();
-        query = "SELECT * FROM cart INNER JOIN pizzaitems ON cart.pizza_id = pizzaitems.id WHERE user_id = ?";
+        query = "SELECT * FROM cart INNER JOIN pizzaitems ON cart.pizza_id = pizzaitems.id WHERE user_id = ? AND delivery_status=?";
         
         try{
           currentConnection = ConnectionManager.getConnection();
@@ -84,6 +84,7 @@ public class CartDaoImpl implements CartDao{
           ps = currentConnection.prepareStatement(query);         
           
           ps.setInt(1, user_id);
+          ps.setBoolean(2, false);
           
           rs = ps.executeQuery();
           
@@ -121,5 +122,45 @@ public class CartDaoImpl implements CartDao{
             }                          
         }
        return cartItems; 
+    }
+    
+    public boolean makeOrder(int user_id){
+        
+        query = "UPDATE cart set delivery_status = ? WHERE user_id =? AND delivery_status = ?";
+        
+        try{
+         currentConnection = ConnectionManager.getConnection();   
+         ps = currentConnection.prepareStatement(query);  
+         
+         ps.setBoolean(1,true);
+         ps.setInt(2,user_id);
+         ps.setBoolean(3,false);
+         
+         ps.executeUpdate();
+         
+         success = true;
+        }catch(Exception e){
+            System.out.println(e);
+            success = false;
+        }finally{
+            if(currentConnection != null){
+                try{
+                    currentConnection.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+            
+            if(ps != null){
+                try{
+                    ps.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+             
+        }
+        
+        return success;
     }
 }

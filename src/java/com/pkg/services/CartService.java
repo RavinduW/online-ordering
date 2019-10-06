@@ -26,4 +26,8 @@ public class CartService {
         return cd.viewCartItems(user_id);
     }
     
+    public boolean makeOrder(int user_id){
+        return cd.makeOrder(user_id);
+    }
+    
 }
