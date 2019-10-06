@@ -5,10 +5,15 @@
  */
 package com.pkg.dao;
 
+import com.pkg.models.Order;
+
 /**
  *
  * @author Ravindu Weerasnghe
  */
 public interface OrderDao {
     
+    public boolean placeOrder(Order order);
+    
+    public boolean doPayments(Order order);
 }

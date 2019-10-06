@@ -5,8 +5,6 @@
  */
 package com.pkg.controllers;
 
-import com.pkg.models.Cart;
-import com.pkg.models.Pizza;
 import com.pkg.services.CartService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Ravindu Weerasnghe
  */
-public class AddToCartController extends HttpServlet {
+public class CartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,20 +32,16 @@ public class AddToCartController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddToCartController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddToCartController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        CartService cs = new CartService();
+        HttpSession session = request.getSession(false);
+        
+        request.setAttribute("cart", cs.viewCart(Integer.parseInt(session.getAttribute("user_id").toString())));
+            
+        String page = "Customer/viewCart.jsp";
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(page);
+        requestDispatcher.forward(request, response); 
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -62,6 +56,7 @@ public class AddToCartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+  
     }
 
     /**
@@ -75,23 +70,7 @@ public class AddToCartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        
-        CartService cs = new CartService();
-        HttpSession session = request.getSession(false);
-        RequestDispatcher rd = request.getRequestDispatcher("Customer/viewAvailablePizza.jsp");
-        
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-        boolean delivery_status = false;
-        int user_id = Integer.parseInt(session.getAttribute("user_id").toString());
-        int pizza_id = Integer.parseInt(request.getParameter("pizza_id"));
-        
-        Cart cart = new Cart(0,user_id,pizza_id,quantity,delivery_status,null);
-        
-        if(cs.addPizzaToCart(cart)){
-            rd.forward(request, response);
-        }
-        
+        processRequest(request, response);
     }
 
     /**

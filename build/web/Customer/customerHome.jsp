@@ -15,7 +15,7 @@
         <h3>Welcome User !</h3>
         <a href="/OnlinePizza/LoginController">LogOut</a>
         <br/>
-        <a href="">View Your Cart</a>
+        <a href="/OnlinePizza/CartController">View Your Cart</a>
         <br/>
         <a href="/OnlinePizza/CustomerHomeController">View Available Pizza</a>
                

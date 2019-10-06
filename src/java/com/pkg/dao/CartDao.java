@@ -5,10 +5,15 @@
  */
 package com.pkg.dao;
 
+import com.pkg.models.Cart;
+import java.util.List;
+
 /**
  *
  * @author Ravindu Weerasnghe
  */
-public interface SalesDao {
+public interface CartDao {  
+    public boolean addItemToCart(Cart cart);
     
+    public List<Cart> viewCartItems(int user_id);
 }

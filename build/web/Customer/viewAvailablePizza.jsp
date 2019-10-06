@@ -29,7 +29,7 @@
                         <td>
                             <form action="/OnlinePizza/AddToCartController" method="post">
                                 <input type="number" min="0" name="quantity" id="quantity" />
-                                <input type="hidden" name="delivery_status" value="false" />
+                                <input type="hidden" name="pizza_id" value="${p.id}" />
                               <button type="submit">Add pizza to cart</button>  
                             </form>
                         </td>  

@@ -49,8 +49,7 @@ public class PizzaDaoImpl implements PizzaDao{
         
         try{
         currentConnection = ConnectionManager.getConnection();
-        
-        
+
         String querySetLimit = "SET GLOBAL max_allowed_packet=16177215";  // 10 MB
         Statement stSetLimit = currentConnection.createStatement();
         stSetLimit.execute(querySetLimit);

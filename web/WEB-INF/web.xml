@@ -39,6 +39,10 @@
         <servlet-name>CustomerHomeController</servlet-name>
         <servlet-class>com.pkg.controllers.CustomerHomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartController</servlet-name>
+        <servlet-class>com.pkg.controllers.CartController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -66,6 +70,7 @@
         <filter-name>CustomerSessionFilter</filter-name>
         <url-pattern>/Customer/*</url-pattern>
         <url-pattern>/CustomerHomeController</url-pattern>
+        <url-pattern>/CartController</url-pattern>
     </filter-mapping>
     <servlet-mapping>
         <servlet-name>AddPizzaController</servlet-name>
@@ -95,9 +100,13 @@
         <servlet-name>CustomerHomeController</servlet-name>
         <url-pattern>/CustomerHomeController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/CartController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            1
+            60
         </session-timeout>
     </session-config>
 </web-app>

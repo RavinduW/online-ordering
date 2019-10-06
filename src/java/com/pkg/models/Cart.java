@@ -11,18 +11,29 @@ package com.pkg.models;
  */
 public class Cart {
     
+    private int id;
     private int user_id; //need to refer users table
     private int pizza_id; //need to refer pizza table
     private int quantity;
     private boolean delivery_status;
+    private Pizza pizza;
     
-    public Cart(int user_id,int pizza_id,int quantity,boolean delivery_status ){
+    public Cart(int id,int user_id,int pizza_id,int quantity,boolean delivery_status,Pizza pizza){
+        this.id = id;
         this.user_id = user_id;
         this.pizza_id = pizza_id;
         this.quantity = quantity;
         this.delivery_status = delivery_status;
+        this.pizza = pizza;
     }
 
+    public int getId(){
+        return id;
+    }
+    
+    public void setId(int id){
+        this.id = id;
+    }
     /**
      * @return the user_id
      */
@@ -77,6 +88,14 @@ public class Cart {
      */
     public void setDelivery_status(boolean delivery_status) {
         this.delivery_status = delivery_status;
+    }
+    
+    public Pizza getPizza(){
+        return pizza;
+    }
+    
+    public void setPizza(Pizza pizza){
+        this.pizza = pizza;
     }
     
     
